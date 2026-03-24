@@ -1,6 +1,9 @@
 import { ChevronRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { HlsVideo } from '@/components/HlsVideo'
+import { motion, useInView } from 'framer-motion'
+import { useRef } from 'react'
+import { slideLeft, slideRight, stagger, staggerItem } from '@/lib/animations'
 
 const STATS = [
   { value: '47.2%', label: 'win-rate increase' },
@@ -10,11 +13,19 @@ const STATS = [
 ]
 
 export function ReverseChessSection() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, amount: 0.2 })
+
   return (
-    <section className="py-32 px-4">
+    <section className="py-32 px-4" ref={ref}>
       <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
         {/* Left: Content */}
-        <div className="order-2 lg:order-1">
+        <motion.div
+          className="order-2 lg:order-1"
+          variants={slideLeft}
+          initial="hidden"
+          animate={inView ? 'visible' : 'hidden'}
+        >
           <div className="inline-flex liquid-glass rounded-full px-4 py-2 items-center gap-2 text-sm mb-6">
             <span className="text-foreground/60">Pipeline Studio</span>
             <span className="liquid-glass rounded-full px-2 py-0.5 flex items-center gap-1 text-xs text-foreground/80 font-medium">
@@ -33,26 +44,47 @@ export function ReverseChessSection() {
             where deals stall and why.
           </p>
 
-          {/* Stat cards */}
-          <div className="grid grid-cols-2 gap-4 mb-8">
+          <motion.div
+            className="grid grid-cols-2 gap-4 mb-8"
+            variants={stagger(0.08)}
+            initial="hidden"
+            animate={inView ? 'visible' : 'hidden'}
+            transition={{ delayChildren: 0.35 }}
+          >
             {STATS.map((s) => (
-              <div key={s.label} className="liquid-glass rounded-2xl p-4">
+              <motion.div
+                key={s.label}
+                variants={staggerItem}
+                className="liquid-glass rounded-2xl p-4 hover:bg-white/[0.03] transition-colors"
+              >
                 <div className="text-primary text-2xl font-semibold">{s.value}</div>
                 <div className="text-muted-foreground text-xs mt-1">{s.label}</div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
-          <Button variant="hero">Try Pipeline Studio</Button>
-        </div>
+          <motion.div
+            variants={staggerItem}
+            initial="hidden"
+            animate={inView ? 'visible' : 'hidden'}
+            transition={{ delay: 0.6 }}
+          >
+            <Button variant="hero">Try Pipeline Studio</Button>
+          </motion.div>
+        </motion.div>
 
         {/* Right: Video */}
-        <div className="order-1 lg:order-2 liquid-glass rounded-3xl aspect-[4/3] overflow-hidden">
+        <motion.div
+          className="order-1 lg:order-2 liquid-glass rounded-3xl aspect-[4/3] overflow-hidden"
+          variants={slideRight}
+          initial="hidden"
+          animate={inView ? 'visible' : 'hidden'}
+        >
           <HlsVideo
             src="https://stream.mux.com/f0001qPDy00mvqkfTRE5OPfAj01VO6wVXj/low.m3u8"
             className="w-full h-full object-cover"
           />
-        </div>
+        </motion.div>
       </div>
     </section>
   )
