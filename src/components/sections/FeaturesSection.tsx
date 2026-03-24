@@ -85,12 +85,12 @@ export function FeaturesSection() {
               variants={staggerItem}
               className="liquid-glass rounded-3xl p-8 hover:bg-white/[0.03] transition-colors group"
             >
-              <h3 className="text-hero-heading text-xl font-semibold mb-3 group-hover:text-primary transition-colors duration-300">
+              <h3 className="text-hero-heading text-xl font-semibold mb-3 group-hover:text-white transition-colors duration-300">
                 {f.title}
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed">{f.description}</p>
               <div className="border-t border-border/50 mt-6 pt-6">
-                <div className="text-primary text-2xl font-semibold">{f.statValue}</div>
+                <div className="text-foreground text-2xl font-semibold">{f.statValue}</div>
                 <div className="text-muted-foreground text-sm mt-1">{f.statLabel}</div>
               </div>
             </motion.div>

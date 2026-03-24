@@ -62,7 +62,7 @@ export function ChessSection() {
                 variants={staggerItem}
                 className="flex items-center gap-3 text-hero-sub text-sm"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                <span className="w-1.5 h-1.5 rounded-full bg-white/60 flex-shrink-0" />
                 {item}
               </motion.li>
             ))}

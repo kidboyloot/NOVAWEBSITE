@@ -1,9 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    './index.html',
-    './src/**/*.{ts,tsx,js,jsx}',
-  ],
+  content: ['./index.html', './src/**/*.{ts,tsx,js,jsx}'],
   theme: {
     extend: {
       colors: {
@@ -41,9 +38,19 @@ export default {
           '0%': { transform: 'translateX(0%)' },
           '100%': { transform: 'translateX(-50%)' },
         },
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
       },
       animation: {
-        marquee: 'marquee 20s linear infinite',
+        marquee: 'marquee 24s linear infinite',
+        'fade-in': 'fade-in 0.6s ease forwards',
+        shimmer: 'shimmer 3s ease infinite',
       },
     },
   },
@@ -52,5 +59,3 @@ export default {
     require('tailwindcss-animate'),
   ],
 }
-
-

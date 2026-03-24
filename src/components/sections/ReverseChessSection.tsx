@@ -57,7 +57,7 @@ export function ReverseChessSection() {
                 variants={staggerItem}
                 className="liquid-glass rounded-2xl p-4 hover:bg-white/[0.03] transition-colors"
               >
-                <div className="text-primary text-2xl font-semibold">{s.value}</div>
+                <div className="text-foreground text-2xl font-semibold">{s.value}</div>
                 <div className="text-muted-foreground text-xs mt-1">{s.label}</div>
               </motion.div>
             ))}

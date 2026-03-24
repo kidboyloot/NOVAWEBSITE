@@ -4,23 +4,21 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all duration-200 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 cursor-pointer',
   {
     variants: {
       variant: {
-        default:
-          'bg-primary text-primary-foreground shadow hover:bg-primary/90',
-        ghost: 'hover:bg-white/5 hover:text-foreground',
-        outline:
-          'border border-border bg-transparent hover:bg-white/5',
-        hero: 'bg-primary text-primary-foreground rounded-full px-6 py-3 text-base font-medium hover:bg-primary/90',
-        heroSecondary:
-          'liquid-glass text-foreground rounded-full px-6 py-3 text-base font-normal hover:bg-white/5',
+        default: 'btn-gradient rounded-lg px-4 py-2 h-9',
+        ghost: 'hover:bg-white/5 hover:text-foreground text-muted-foreground',
+        outline: 'border border-border bg-transparent hover:bg-white/5 text-foreground',
+        hero: 'btn-gradient rounded-full px-6 py-3 text-base font-semibold',
+        heroSecondary: 'btn-gradient-secondary rounded-full px-6 py-3 text-base font-normal',
+        subtle: 'bg-white/[0.04] border border-white/[0.08] text-foreground hover:bg-white/[0.07] rounded-lg px-4 py-2',
       },
       size: {
         default: 'h-9 px-4 py-2',
         sm: 'h-8 rounded-full px-4 text-xs',
-        lg: 'h-10 rounded-full px-8',
+        lg: 'h-11 rounded-full px-8 text-base',
         icon: 'h-9 w-9',
       },
     },
@@ -41,11 +39,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button'
     return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      />
+      <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
     )
   }
 )
